@@ -8,19 +8,58 @@ from patchify import patchify, unpatchify
 import matplotlib.pyplot as plt
 from PIL import Image
 import keras
-
+import json
+from streamlit_lottie import st_lottie 
+import requests
 def main():
     selected_box = st.sidebar.selectbox(
         'Choose an option..',
         ('About the App','Denoise Image')
         )
+
+
    # readme_text = st.markdown(get_file_content_as_string("README.md"))
     
     if selected_box == 'About the App':
+        st.title("UNDER WATER PHOTOGRAPHY NOISE CANCELLATION USING AI & DEEP LEARNING")
         st.sidebar.success('To try by yourself select "Evaluate the model".')
+        st.subheader("What is noise ?")
+        st.write("An additional unnecessary pixel values are added to a image causing the loss of information.The noise can be originated by many ways such as while capturing images in low-light situations, damage of electric circuits due to heat, sensor illumination levels of a digital camera or due to the faulty memory locations in hardware or bit errors in transmission of data over long distances. It is essential to remove the noise and recover the original image from the degraded images where getting the original image is important for robust performance or in cases where filling the missing information is very useful like the astronomical images that are taken from very distant objects.")
+        st.subheader("Solution :")
+        st.subheader("Using DNCNN model :")
+        st.write("Therea are many deep learning model that can be used for completing this task of image denoising. Now we will use Deep Convulutional Neural Network model (DnCNN)")
+        st.subheader("Architecture of the model :")
+        st.image("img.jpeg")
+        st.write("Given a noisy image 'y' the model will predict residual image 'R' and clean image 'x' can be obtained by "
+        
+ "x=y-R")
+        st.subheader("Using RIDNET model :")
+        st.write("Real Image Denoising with Feature Attention.")
+        st.subheader("Architecture of the model:")
+        st.image("img2.jpeg")
+        st.write("This model is composed of three main modules i.e. feature extraction, feature learning residual on the residual module, and reconstruction, as shown in Figure .")
+        st.subheader("Dataset:")
+        st.write("We will be using publicly avaliable image and modify it according to our requirement")
+        st.write("dataset : https://github.com/BIDS/BSDS500")
+        st.write("This Dataset is provided by Berkeley University of California which contains 500 natural images.")
+        st.write("Now we create 85600 patches of size 40 x 40 that was created from 400 train images and 21400 patches of size 40 x 40 that was created from 100 test images")
+        st.subheader("Training:")
+        st.write("Model has been train for 30 epochs with Adam optimizer of learning rate=0.001 and with learning rate decay of 5% per epoch .Mean Squared Error is used as loss function for DNCNN model and Mean Absolute Error for RIDNET.")
+        st.subheader("Results :")
+        st.write("This results are from DNCNN model.")
+        st.write("For an noisy image with psnr of 20.530 obtained denoised image which has psnr of 31.193")
+        st.write("Image showing the comparision of ground truth, noisy image and denoised image.")
+        st.image("img3.jpeg")
+        st.write("Image showing patch wise noisy and denoised images.")
+        st.image("img4.jpeg")
+        st.write("Below plot shows the model performance on different noise levels")
+        st.image("img5.jpeg")
+        st.subheader("Comparision of the models :")
+        st.write("Tabulating the results(PSNR in db) from the models with different noise level")
+        st.image("img6.jpeg")
 
-                
     if selected_box == 'Denoise Image':
+
         models()
 
     
@@ -100,6 +139,26 @@ def prediction(img):
     st.write('Time taken for prediction :', str(round(end-start,3))+' seconds')
     progress_bar.empty()
     state.text('\n Completed!')
+
+with st.sidebar:
+    def load_lottieurl(url: str):
+            r = requests.get(url)
+            if r.status_code != 200:
+                return None
+            return r.json()
+
+lottie_hello = load_lottieurl("https://assets5.lottiefiles.com/private_files/lf30_idnzhjhq.json")
+st_lottie(
+    lottie_hello,
+    speed=1,
+    reverse=False,
+    loop=True,
+    quality="high", # medium ; high
+    
+    height=None,
+    width=None,
+    key=None,
+)
     
 if __name__ == "__main__":
     main()   

@@ -4,3 +4,4 @@ opencv-python-headless
 patchify
 matplotlib
 keras
+streamlit_lottie
