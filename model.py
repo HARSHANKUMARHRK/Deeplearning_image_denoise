@@ -22,7 +22,7 @@ def main():
     
     if selected_box == 'About the App':
         st.title("UNDER WATER PHOTOGRAPHY NOISE CANCELLATION USING AI & DEEP LEARNING")
-        st.sidebar.success('To try by yourself select "Evaluate the model".')
+        st.sidebar.success('To try by yourself select "Evaluate the model')
         st.subheader("What is noise ?")
         st.write("An additional unnecessary pixel values are added to a image causing the loss of information.The noise can be originated by many ways such as while capturing images in low-light situations, damage of electric circuits due to heat, sensor illumination levels of a digital camera or due to the faulty memory locations in hardware or bit errors in transmission of data over long distances. It is essential to remove the noise and recover the original image from the degraded images where getting the original image is important for robust performance or in cases where filling the missing information is very useful like the astronomical images that are taken from very distant objects.")
         st.subheader("Solution :")
